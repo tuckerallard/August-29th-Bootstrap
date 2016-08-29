@@ -1,0 +1,66 @@
+package com.weekfourproject;
+
+import java.sql.*;
+import java.util.ArrayList;
+
+public class DAO 
+{
+	static final String DB_URL = "jdbc:mysql://localhost:3306/?user=root&autoReconnect=true&useSSL=false";
+	static final String USER = "root";
+	static final String PASSWORD = "root";
+	
+	static Connection CONN= null;
+	static Statement STMT= null;
+	static PreparedStatement PREP_STMT = null;
+	static ResultSet RES_SET= null;
+	
+	public static void connToDB()
+	{
+		try 
+		{
+			System.out.println("Connecting to the Database");
+			CONN = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+			System.out.println("Connected to the database");
+		}
+		
+		catch (SQLException e) 
+		{
+		System.out.println("Failed to connect to the database.");
+		e.printStackTrace();
+		}
+	}
+	
+	public static void readFromDB() 
+	{
+		connToDB();
+		
+		ArrayList<Movie> ourMovies = new ArrayList<>();
+		try
+		{
+			STMT = CONN.createStatement();
+			RES_SET = STMT.executeQuery("SELECT * FROM movies.movies;");
+			
+			while(RES_SET.next())
+			{
+				Movie movietInDB = new Movie();
+				movietInDB.setMovieID(RES_SET.getString("movie_id"));
+				movietInDB.setMovieTitle(RES_SET.getString("title"));
+				movietInDB.setMovieRating(RES_SET.getString("rating"));
+				movietInDB.setMovieGenre(RES_SET.getString("genre"));
+				movietInDB.setMovielength(RES_SET.getInt("length"));
+				
+				ourMovies.add(movietInDB);
+			}
+			
+			for(Movie Movie : ourMovies)
+			{
+				System.out.println(Movie.toString());
+			}
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+}

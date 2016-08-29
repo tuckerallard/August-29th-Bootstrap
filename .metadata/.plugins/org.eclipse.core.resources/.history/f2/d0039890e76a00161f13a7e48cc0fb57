@@ -1,0 +1,61 @@
+package com.weekfourproject;
+
+public class DAO 
+{
+	private String movieID = null;
+	private String movieTitle = null;
+	private String movieRating = null;
+	private String movieGenre = null;
+	private int movielength = 0;
+	
+	public DAO() {
+		super();
+	}
+	
+	public String getMovieID() {
+		return movieID;
+	}
+	
+	public void setMovieID(String movieID) {
+		this.movieID = movieID;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	public String getRating() {
+		return rating;
+	}
+	
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+	
+	public String getGenre() {
+		return genre;
+	}
+	
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	
+	public int getLength() {
+		return length;
+	}
+	
+	public void setLength(int length) {
+		this.length = length;
+	}
+	
+	@Override
+	public String toString() {
+		return "DAO [movieID=" + movieID + ", title=" + title + ", rating=" + rating + ", genre=" + genre + ", length="
+				+ length + "]";
+	}
+
+}
